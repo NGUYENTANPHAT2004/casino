@@ -21,6 +21,7 @@ app.use("/api/auth", require("./routes/auth.route"));
 
 // Khởi động Socket.IO
 socketConfig(server);
+console.log("api endpoint");
 
 // Chạy server
 const PORT = process.env.PORT || 5000;
