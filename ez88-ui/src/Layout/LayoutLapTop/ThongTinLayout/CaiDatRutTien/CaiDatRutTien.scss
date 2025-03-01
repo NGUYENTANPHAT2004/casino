@@ -1,0 +1,28 @@
+.caidatruttien_container {
+    margin-top: 20px;
+}
+
+.caidatruttien_header {
+    display: flex;
+    flex-direction: column;
+}
+
+.divinputloairt_container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.divinputloairt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .caidatruttien_container {
+        color: var(--title-color);
+        min-height: 100dvh;
+        padding: 10px;
+    }
+}

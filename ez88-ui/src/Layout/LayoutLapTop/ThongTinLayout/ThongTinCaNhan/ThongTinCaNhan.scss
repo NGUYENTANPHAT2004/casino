@@ -1,0 +1,53 @@
+.mainaccount_title {
+    display: flex;
+    font-weight: 600;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.mainaccount_tab {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.mainaccount_tab_item {
+    position: relative;
+    min-width: 60px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    display: inline-block;
+    text-align: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background: transparent;
+    color: #98a7b5;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #3c404a;
+}
+
+.mainaccount_tab_item_active {
+    color: var(--title-color);
+    background: linear-gradient(180deg, #b3fc74, #89eb34);
+}
+
+@media screen and (max-width: 768px) {
+    .thongtincanhan_container{
+        min-height: 100dvh;
+        color: var(--title-color);
+        background-color: var(--standard-color);
+        padding: 10px;
+    }
+
+}

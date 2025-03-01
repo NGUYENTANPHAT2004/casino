@@ -1,0 +1,52 @@
+.Dialog_popup__VKsaz {
+    background-color: var(--light);
+    width: 380px;
+    max-width: 95vw;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 12px;
+}
+
+.Dialog_iconWarn__MskkG {
+    font-size: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+}
+
+
+.Dialog_titlePopup__3iBru {
+    font-size: 18px;
+    margin-top: 12px;
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    color: black;
+}
+
+.Dialog_note__kz7NT {
+    color: var(--text-color);
+    font-weight: 400;
+    line-height: inherit;
+    margin-top: 4px;
+    text-align: center;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.Dialog_groupBtnPopup__SHV_R {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    gap: 12px;
+}
+
+.Button_grey__1tZKm {
+    background: var(--grey);
+    border: 1px solid var(--grey);
+    color: var(--light);
+}

@@ -1,0 +1,126 @@
+.naptien_container {
+    margin-top: 10px;
+}
+
+.naptien_header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h3 {
+        color: #89eb34;
+    }
+}
+
+.qr_naptien {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.naptien_body {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.diachivi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.divlinklienketvi {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border: 1px solid #3c404a;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .naptien_container {
+        color: var(--title-color);
+        min-height: 100dvh;
+    }
+
+    .diachivi {
+        align-items: center !important;
+    }
+
+    .divlinklienketvi {
+        span {
+            width: calc(100vw - 80px);
+            overflow: hidden;
+        }
+    }
+}
+
+.method_naptien {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.naptien {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.divchonnganhang {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 20px;
+
+    label {
+        font-weight: 500;
+    }
+
+    .tippy-box {
+        width: 420px !important;
+    }
+}
+
+.chonganhangfooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.divtien {
+    display: flex;
+    column-gap: 8px;
+    overflow-x: auto;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.divtien_item {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e7e7e7;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--title-color);
+    display: flex;
+    row-gap: 8px;
+    margin-bottom: 12px;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+    .divchonnganhang {
+        .tippy-box {
+            width: calc(100vw - 40px) !important;
+        }
+    }
+}

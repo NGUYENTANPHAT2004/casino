@@ -1,0 +1,65 @@
+.tongquatvitien_container {
+    display: flex;
+    height: 100%;
+}
+
+.tongquatvitien_header_item {
+    position: relative;
+    min-width: 60px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    display: inline-block;
+    text-align: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background: transparent;
+    color: #98a7b5;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #3c404a;
+}
+
+.tongquatvitien_header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+}
+
+.tongquatvitien_header_item_active {
+    color: var(--title-color);
+    background: linear-gradient(180deg, #b3fc74, #89eb34);
+}
+
+.tongquatvitien_tong {
+    flex: 1;
+    padding: 10px;
+}
+
+.tongquatvitien_chuy {
+    flex: 1;
+    background-color: var(--background-color);
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+
+    ul {
+        list-style-position: inside;
+
+        li {
+            padding: 8px;
+            color: #98a7b5;
+        }
+    }
+}
+
+.tieude_chuy {
+    color: #89eb34;
+}

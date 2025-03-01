@@ -1,0 +1,35 @@
+.khuyenmaimb_container {
+    position: relative;
+    background-color: var(--background-color);
+    color: var(--title-color);
+}
+
+.khuyenmaimb {
+    padding: 24px 0;
+    display: grid;
+
+    .GridColumn_container__QbIKO {
+        --columns: 1 !important;
+        --gap: 12px !important;
+
+        a {
+            position: relative;
+            padding-top: 46%;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: .2s;
+            text-decoration: none;
+            color: #000;
+            img{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                inset: 0px;
+                color: transparent;
+                object-fit: cover;
+            }
+        }
+
+    }
+}

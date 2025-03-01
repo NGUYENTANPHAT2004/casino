@@ -1,0 +1,1 @@
+export{default as GioiThieuLayout} from './GioiThieuLayout'

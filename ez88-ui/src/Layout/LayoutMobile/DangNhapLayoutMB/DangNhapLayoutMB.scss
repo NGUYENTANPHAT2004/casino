@@ -1,0 +1,34 @@
+@media screen and (max-width: 768px) {
+    .formauth_container {
+        grid-template-columns: unset !important
+    }
+
+    .FormLogin_denlong2__Q_DLr {
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: -25px;
+        width: 100px;
+        height: 100px;
+
+        img {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            inset: 0px;
+            color: transparent;
+        }
+    }
+
+    .FormSignup_type__ga8F0 {
+        font-size: 16px;
+    }
+
+    input {
+        font-size: 16px !important;
+    }
+
+    .switchbutton_container::after {
+        top: 58% !important
+    }
+}

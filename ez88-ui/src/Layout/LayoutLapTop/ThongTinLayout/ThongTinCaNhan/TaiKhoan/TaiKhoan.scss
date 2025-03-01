@@ -1,0 +1,107 @@
+.taikhoancn_header {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #98a7b5;
+}
+
+.taikhoancn_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.taikhoancn_item {
+    padding: 18px 24px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    gap: 8px;
+
+    span {
+        font-size: 14px;
+        font-weight: 500;
+
+    }
+}
+
+.sinhnhat {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    input {
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+}
+
+.spanemail {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    input {
+        flex: 1;
+        display: block;
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 10.5px 12px;
+        font-size: 14px;
+        background-color: transparent;
+        color: var(--title-color);
+        border-radius: 5px;
+
+        &:focus {
+            border: 1px solid #89eb34;
+            outline: none;
+        }
+    }
+
+    input[readonly]:focus {
+        border: 1px solid #89eb34;
+        outline: none;
+    }
+
+}
+
+.btnthuchien {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    button {
+        padding: 10px;
+        background-color: #89eb34;
+        color: var(--title-color);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: .2s;
+    }
+
+    .btnhuysua {
+        background: #696969;
+        border: 1px solid #696969;
+        color: var(--title-color);
+    }
+}
+.divspanemail{
+    width: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .divspanemail{
+        width: 60px;
+    }
+}

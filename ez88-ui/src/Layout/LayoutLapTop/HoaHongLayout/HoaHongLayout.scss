@@ -1,0 +1,123 @@
+.divhoahong_container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tab_list {
+    display: flex;
+    padding: 0 12px;
+    gap: 30px;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+
+.tab_item {
+    cursor: pointer;
+    position: relative;
+    padding: 8px 0 10px;
+    color: var(--title-color);
+
+    ::after {
+        width: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        height: 2px;
+        position: absolute;
+        transition: width .3s;
+        background-color: #89eb34;
+    }
+}
+
+.tab_item_active {
+    font-weight: 600;
+    color: #89eb34 !important;
+
+    ::after {
+        width: calc(100% - 15px);
+    }
+}
+
+.tab_itemtext {
+    font-size: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+
+}
+
+@media screen and (max-width: 768px) {
+    .divhoahong_container {
+        height: calc(100vh - var(--menu-height-mobile) - var(--header-height));
+    }
+
+    .tab_itemtext {
+        font-size: 16px;
+    }
+
+    .header_gioithieu {
+        width: 100% !important;
+    }
+
+    .formgioithieu {
+        width: 100%;
+        align-items: center !important;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        label {
+            font-weight: 500;
+        }
+    }
+
+    .formgioithieu_input {
+        width: 96% !important;
+
+        input {
+            width: 250px !important;
+            font-size: 14px !important;
+        }
+    }
+
+    .formgioithieu_button {
+        width: 100% !important;
+        gap: 10px;
+    }
+
+    .formgioithieu_button_icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .divlevel {
+        width: 100% !important;
+    }
+
+    .divlevel2 {
+        font-size: 16px !important;
+    }
+
+    .lichsu_tien {
+        font-size: 18px !important;
+    }
+
+    .divcontent {
+        font-size: 14px;
+
+    }
+
+    .rebate-table th {
+
+        font-size: 14px !important;
+    }
+
+    .tab_list {
+        width: unset !important;
+        
+    }
+}

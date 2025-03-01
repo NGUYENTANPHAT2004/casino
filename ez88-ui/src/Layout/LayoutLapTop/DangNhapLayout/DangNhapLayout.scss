@@ -1,0 +1,286 @@
+.modaldangnhap {
+    position: relative;
+    z-index: 1000;
+}
+
+@keyframes Popup_show__UTrTY {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.5;
+    }
+}
+
+@keyframes Popup_showForm__Mn2Sp {
+    from {
+        opacity: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(.5);
+    }
+
+    to {
+        opacity: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.modaldangnhap_overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #141414;
+    animation: Popup_show__UTrTY .2s linear forwards;
+}
+
+.modaldangnhap_main {
+    position: fixed;
+    width: max-content;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: Popup_showForm__Mn2Sp .2s forwards;
+}
+
+.formauth_container {
+    width: 620px;
+    background-color: var(--title-color);
+    min-height: 400px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    color: #141414;
+    max-width: 95vw;
+}
+
+.fromauth_close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 26px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    z-index: 1;
+    color: #818181;
+}
+
+.formauth_image {
+    background-image: url('../../../../public/images/imgdangnhap2.webp');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px 0 0 12px;
+}
+
+.formauth_form {
+    position: relative;
+    background-image: url('../../../../public/images/imgdangnhap4.webp');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 72px 16px 32px;
+}
+
+.formauth_tag,
+.formauth_tag span {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.formauth_tag {
+    top: 8px;
+    min-width: 260px;
+    min-height: 50px;
+}
+
+.formauth_tag img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    inset: 0px;
+    color: transparent;
+}
+
+.formauth_tag span {
+    top: 45%;
+    font-weight: 700;
+    line-height: 40px;
+    background: linear-gradient(180deg, #ef5600 3.18%, #1b1202);
+    text-transform: uppercase;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+}
+
+.formauth_title {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.input_container_label {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.input_group_input {
+    position: relative;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 12px;
+
+    i {
+        padding-left: 10px;
+        font-size: 20px;
+        color: #c3c3c3;
+    }
+}
+
+.input_input {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10.5px 12px;
+    font-size: 14px;
+}
+
+.input_eye {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    z-index: 2;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    text-decoration: underline;
+    font-size: 20px;
+    color: #c3c3c3;
+}
+
+.formlogin_groupoption {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #696969;
+
+}
+
+.formlogin_remember {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+}
+
+.switchbutton_container {
+    background-color: #efefef;
+    width: 40px;
+    height: 20px;
+    border-radius: 23px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+
+}
+
+.switchbutton_container::after {
+    content: "";
+    position: absolute;
+    left: 17px;
+    top: 57%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--title-color);
+    box-shadow: 0 0 1px rgba(40, 41, 61, .08),
+        0 .5px 2px rgba(96, 97, 112, .16);
+    transition: .2s;
+}
+
+.switchbutton_check {
+    background: #4ad325 !important;
+}
+
+.switchbutton_check::after {
+    left: 40px;
+}
+
+.formlogin_groupbtn {
+    margin-top: 16px;
+
+    .Button_container__By3IT {
+        width: unset !important;
+
+        .Button_btn__z_3IU {
+            width: unset !important;
+        }
+    }
+}
+
+.Button_rounded_6__tsqKR {
+    border-radius: 6px;
+}
+
+.Button_primary__8ZICM {
+    background: #89eb34;
+    color: var(--title-color);
+}
+
+.FormLogin_note__3xgzD {
+    margin-top: 24px;
+
+    text-align: center;
+    font-size: 14px;
+}
+
+.FormLogin_note__3xgzD span {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    font-weight: 600;
+    color: #89eb34;
+}
+
+.FormLogin_denlong__WFfoN {
+    position: absolute;
+    bottom: 0;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+
+    img {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        inset: 0px;
+        color: transparent;
+        display: block;
+    }
+}

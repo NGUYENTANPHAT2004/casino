@@ -1,0 +1,335 @@
+.baseLayout_main {
+    position: relative;
+    background-color: var(--background-color);
+    color: var(--title-color);
+}
+
+.mainhome_container {
+    padding-top: 24px;
+}
+
+.layout_wrapper_container {
+    margin: 0 auto;
+}
+
+.mainhome_mb {
+    margin-bottom: 42px;
+}
+
+.banner_container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+}
+
+
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+}
+
+.slick-list {
+    overflow: hidden;
+    padding: 0 10px;
+    height: 250px;
+    /* Thêm khoảng cách hai bên */
+}
+
+.slick-slide {
+    margin: 0 10px;
+    /* Tạo khoảng cách giữa các ảnh */
+}
+
+/* Giãn ảnh full kích thước */
+.banner_item img {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+}
+
+.slick-slide {
+    width: 380px !important;
+}
+
+.slick-dots {
+    display: block !important;
+    /* Đảm bảo dots hiển thị */
+    position: absolute;
+    bottom: 10px;
+    /* Điều chỉnh vị trí */
+    left: 50%;
+    transform: translateX(-50%);
+    list-style: none;
+    text-align: center;
+}
+
+.slick-dots li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.slick-dots li button {
+    font-size: 0;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.slick-dots li.slick-active button {
+    background: #ff6600;
+    /* Màu của dot khi active */
+}
+
+.gamecontainer-row {
+    display: flex;
+    flex-wrap: wrap;
+    height: 316px;
+    width: 1200px;
+    margin: 0 auto !important;
+}
+
+.gameinfo-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+@media (min-width: 1200px) {
+    .GameInfo_col_md_3__yol49 {
+        flex: 0 0 25% !important;
+        max-width: 25%;
+    }
+
+    .GameInfo_col_md_6__fVYEq {
+        flex: 0 0 50% !important;
+        max-width: 50%;
+    }
+
+}
+
+.GameInfo_col__Gj7YL {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+.GameInfo_providerGame__fsnbd {
+    position: relative;
+    overflow: hidden;
+    flex: auto;
+    cursor: pointer;
+}
+
+.GameInfo_img_game__kyl3x {
+    --duration: 2s;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.GameInfo_providerGame__fsnbd img {
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.img-full {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    color: transparent;
+}
+
+.GameInfo_nameProvider__Z_KsX {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    padding: 5px;
+    border-radius: 0 12px;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    grid-gap: 5px;
+    gap: 5px;
+    align-items: center;
+}
+
+.GameInfo_nameProvider__Z_KsX .GameInfo_logo__k8eFM {
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+.GameInfo_nameProvider__Z_KsX p {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 24px;
+    text-align: center;
+}
+
+.GameInfo_h_100__60W_4 {
+    height: 100%;
+}
+
+.GameInfo_row_gap_10__QpOsg {
+    row-gap: 10px;
+}
+
+.GameInfo_row__2NqhN {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.bestgame_container {
+    padding-bottom: 32px;
+    color: var(--title-color);
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.titlesection_container {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.titlesection_name {
+    margin-right: auto;
+    margin: 0;
+    padding: 0;
+    color: var(--title-color);
+}
+
+@media (max-width: 1440px) {
+    .gridcolumn_container.gridcolumn_col6.gridcolumn_sm {
+        --columns: 5 !important;
+    }
+}
+
+@media (max-width: 1600px) {
+    .gridcolumn_container.gridcolumn_col6.gridcolumn_sm {
+        --columns: 6;
+    }
+}
+
+.gridcolumn_container.gridcolumn_col6.gridcolumn_sm {
+    --columns: 6;
+    --gap: 12px;
+}
+
+.gridcolumn_container {
+    --columns: 3;
+    --gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    grid-gap: var(--gap);
+}
+
+.gotogame_container {
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+}
+
+.cardgame_container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cardgame_img {
+    color: transparent;
+    max-width: 100%;
+    transition: 0.2s;
+    display: block;
+    object-fit: cover;
+
+}
+
+.HelpCenter_container__ONosN {
+    border-radius: 16px 0 0 16px;
+    border: 2px solid #2a2d34;
+    background: #1c1e22;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    z-index: 97;
+    width: 60px;
+    padding: 8px;
+    gap: 2px;
+    flex-direction: column;
+    display: flex;
+}
+
+.HelpCenter_item__8R90S {
+    position: relative;
+    background: linear-gradient(180deg, #5a5a5a, #303030);
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    i {
+        display: block;
+        position: relative;
+        padding-top: 100%;
+        width: 100%;
+
+        img {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            color: transparent;
+        }
+
+    }
+}
+
+@media screen and (max-width: 768px){
+    .HelpCenter_container__ONosN{
+        border-radius: 8px 0 0 8px;
+        border: 2px solid #2a2d34;
+        background: #1c1e22;
+        position: fixed;
+        bottom: calc(var(--menu-height-mobile)* 1.1);
+        top: unset !important;
+        right: 0;
+        z-index: 97;
+        width: 50px;
+        padding: 2px;
+        gap: 2px;
+        flex-direction: column;
+    }
+
+}

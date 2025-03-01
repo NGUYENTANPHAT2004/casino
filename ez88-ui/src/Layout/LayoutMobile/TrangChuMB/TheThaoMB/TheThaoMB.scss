@@ -1,0 +1,119 @@
+.thethaomenumb_container {
+    width: calc(min(max(min(100vw - 128px, 90vw), 1400px), 100vw - 2* var(--p)) - var(--w-menu) - var(--gap));
+    height: 100%;
+}
+
+.mainlivethethao_container {
+    height: 100%;
+    overflow: auto;
+}
+
+.mainlivethethao {
+    margin: 0 auto;
+}
+
+.mainlivethethao_list {
+    padding-bottom: 32px;
+}
+
+@media (max-width: 764px) {
+    .GridColumn_container__QbIKO.GridColumn_col_5__H4lCj.GridColumn_sm__eo_P2 {
+        --columns: 3 !important;
+    }
+}
+
+@media (max-width: 1440px) {
+    .GridColumn_container__QbIKO.GridColumn_col_5__H4lCj.GridColumn_sm__eo_P2 {
+        --columns: 4;
+    }
+}
+
+@media (max-width: 1600px) {
+    .GridColumn_container__QbIKO.GridColumn_col_5__H4lCj.GridColumn_sm__eo_P2 {
+        --columns: 5;
+    }
+}
+
+.GridColumn_container__QbIKO.GridColumn_col_5__H4lCj.GridColumn_sm__eo_P2 {
+    --columns: 5;
+    --gap: 8px;
+}
+
+@media (max-width: 764px) {
+    .GridColumn_container__QbIKO.GridColumn_col_5__H4lCj {
+        --columns: 1 !important;
+        --gap: 12px;
+    }
+    .GridColumn_container__QbIKO.GridColumn_col_5__H4lCj.Grid_thethao {
+        --columns: 1 !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .GridColumn_container__QbIKO.GridColumn_col_5__H4lCj {
+        --columns: 2;
+    }
+}
+
+@media (max-width: 1440px) {
+    .GridColumn_container__QbIKO.GridColumn_col_5__H4lCj {
+        --columns: 3;
+    }
+}
+
+.GridColumn_container__QbIKO.GridColumn_col_5__H4lCj {
+    --columns: 5;
+}
+
+@media (max-width: 764px) {
+    .GridColumn_container__QbIKO {
+        --columns: 1;
+        --gap: 12px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .GridColumn_container__QbIKO {
+        --columns: 2;
+    }
+}
+
+.GridColumn_container__QbIKO {
+    --columns: 3;
+    --gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    grid-gap: var(--gap);
+}
+
+.GotoGame_container__azuAM{
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+}
+
+.CardGame_container__NneKf{
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    img{
+        color: transparent;
+        max-width: 100%;
+        display: block;
+        transition: 0.2s;
+        object-fit: cover;
+    }
+}
+.texthethaomb{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+

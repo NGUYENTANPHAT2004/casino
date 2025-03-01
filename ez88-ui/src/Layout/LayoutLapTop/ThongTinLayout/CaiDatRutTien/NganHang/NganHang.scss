@@ -1,0 +1,54 @@
+.divinputchonganhang {
+    display: flex;
+    align-items: center;
+
+
+}
+
+.nganhang_container {
+    margin-top: 20px;
+}
+
+.nganhang_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    input {
+        background-color: transparent;
+    }
+
+    label {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    p {
+        color: var(--primary);
+    }
+
+    .tippy-box {
+        width: 880px;
+    }
+}
+
+.itemnh {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .tippy-content {
+        background-color: var(--standard-color) !important;
+        padding: 0 !important;
+    }
+
+    .nganhang_body {
+        .tippy-box {
+            width: calc(100vw - 20px) !important;
+        }
+    }
+}

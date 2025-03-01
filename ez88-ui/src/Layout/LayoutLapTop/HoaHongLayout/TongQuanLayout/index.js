@@ -1,0 +1,1 @@
+export {default as TongQuanLayout} from './TongQuanLayout'

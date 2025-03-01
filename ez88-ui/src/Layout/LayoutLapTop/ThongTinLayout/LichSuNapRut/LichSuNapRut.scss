@@ -1,0 +1,17 @@
+@media screen and (max-width: 768px) {
+    .lichsunaprut_container {
+        min-height: 100dvh;
+        color: var(--title-color);
+        padding: 10px;
+    }
+
+}
+
+.divfilter {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    span{
+        font-weight: 500;
+    }
+}

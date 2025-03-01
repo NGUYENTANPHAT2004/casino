@@ -1,0 +1,90 @@
+.ruttien_container {
+    margin-top: 20px;
+}
+
+.divsodu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.phuongthuc_sodu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sodutong {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid var(--title-color);
+
+    span {
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+
+.divchonmangluoi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.divinputmangluoi {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.divtienrutra {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.divinputnhapsotien {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #e6e6e6;
+    margin-top: 10px;
+
+    input {
+        flex: 1;
+        font-size: 16px;
+        color: var(--title-color);
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+}
+
+.btnruttien {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #89eb34;
+    color: var(--title-color);
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid var(--title-color);
+    font-weight: 600;
+    margin-top: 20px;
+}
+ @media screen and (max-width: 768px) {
+    .ruttien_container{
+        color: var(--title-color);
+        min-height: 100dvh;
+        padding: 10px;
+    }
+ }

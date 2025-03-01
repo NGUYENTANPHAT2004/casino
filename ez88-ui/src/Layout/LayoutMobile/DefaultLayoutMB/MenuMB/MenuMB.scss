@@ -1,0 +1,185 @@
+.menumb_container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--page-shadow);
+    z-index: 100;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px
+}
+
+.menumb_container.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.menumb_header_tong {
+    max-width: max(min(100% - 128px, 90vw), 1400px);
+    margin: 0 auto;
+    padding: 0 12px;
+    width: 100%;
+    display: block;
+}
+
+.menumb_header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 20px;
+    height: 40px;
+
+    .Button_btn__z_3IU {
+        height: unset !important;
+    }
+
+}
+
+.Button_hight_light__1zxVb {
+    background-color: var(--standard-color);
+    border: 0;
+    color: var(--green);
+}
+
+.MenuMobile_text_color__DIsiN {
+    color: var(--title-color) !important;
+}
+
+.menumb_header>:nth-child(3) {
+    width: 93.94px;
+    max-width: 93.94px;
+    min-width: 93.94px;
+}
+.menumb_header>:first-child {
+    min-width: 120px;
+}
+.menumb_header>* {
+    flex: 0 1 1px;
+    height: 40px;
+}
+.menumb_header>:first-child>* {
+    height: 100%;
+}
+
+.menumb_gamecontainer {
+    position: relative;
+    flex: 1 1;
+    overflow: auto;
+    padding: 12px 0;
+    margin-top: 40px;
+}
+
+.grid.wide {
+    max-width: max(min(100% - 128px, 90vw), 1400px);
+    margin: 0 auto;
+}
+
+@media (max-width: 764px) {
+    .grid {
+        display: block;
+        padding: 0 12px;
+    }
+}
+
+.menumb_game {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    grid-gap: 12px;
+    gap: 12px;
+    overflow: auto;
+}
+
+.menumb_game_item {
+    background-image: url('../../../../../public/images/ICONTT.png');
+    padding-top: 130%;
+    position: relative;
+    height: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--sub-text-color);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+.menumb_game_item1 {
+    background-image: url('../../../../../public/images/ICONCASINO.png');
+    padding-top: 130%;
+    position: relative;
+    height: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--sub-text-color);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+.menumb_game_item2 {
+    background-image: url('../../../../../public/images/ICONSLOT.png');
+    padding-top: 130%;
+    position: relative;
+    height: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--sub-text-color);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.menumb_game_item3 {
+    background-image: url('../../../../../public/images/ICONBANCA.png');
+    padding-top: 130%;
+    position: relative;
+    height: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--sub-text-color);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+
+.menumb_game_item4 {
+    background-image: url('../../../../../public/images/ICONDAGA.png');
+    padding-top: 130%;
+    position: relative;
+    height: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--sub-text-color);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}

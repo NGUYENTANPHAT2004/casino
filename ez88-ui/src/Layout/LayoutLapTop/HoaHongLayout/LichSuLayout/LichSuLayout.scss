@@ -1,0 +1,65 @@
+.lichsu_body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    color: var(--title-color);
+    margin-top: 20px;
+}
+
+.lichsu_tien {
+    font-size: 25px;
+    font-weight: 500
+}
+
+.lichsu_header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    div {
+        font-size: 20px;
+        font-weight: 500;
+    }
+}
+
+.lichsu_footer {
+    border-top: 1px solid var(--title-color);
+}
+
+.divhinhthuc {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+
+    span {
+        font-size: 20px;
+        font-weight: 500;
+    }
+}
+
+.divinputdate {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--title-color);
+    padding: 10px;
+
+    input {
+        flex: 1;
+        font-size: 16px;
+        color: var(--title-color);
+        border: none;
+        outline: none;
+        background-color: transparent;
+
+    }
+
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: block !important;
+    opacity: 1;
+    background-color: white;
+}

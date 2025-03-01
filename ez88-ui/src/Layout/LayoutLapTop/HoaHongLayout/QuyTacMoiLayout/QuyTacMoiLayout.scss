@@ -1,0 +1,127 @@
+.quytac_body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.divlevel {
+    display: flex;
+    flex-direction: column;
+    /* Để nội dung xổ xuống theo chiều dọc */
+    color: var(--title-color);
+    align-items: center;
+    justify-content: space-between;
+    width: 500px;
+    padding: 10px;
+    border-bottom: 1px solid var(--title-color);
+}
+
+.divlevel1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.divlevel2 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.divvien,
+.divvien2,
+.divvien3,
+.divvien4,
+.divvien5,
+.divvien6 {
+    width: 4px;
+    height: 24px;
+    border-radius: 50px;
+}
+
+.divvien {
+    background-color: rgb(246, 195, 81);
+}
+
+.divvien2 {
+    background-color: rgb(234, 134, 81);
+}
+
+.divvien3 {
+    background-color: rgb(208, 80, 77);
+}
+
+.divvien4 {
+    background-color: rgb(38, 170, 107);
+}
+
+.divvien5 {
+    background-color: rgb(51, 175, 228);
+}
+
+.divvien6 {
+    background-color: rgb(111, 32, 190);
+}
+
+/* CSS để xổ xuống */
+.divcontent {
+    display: block;
+    background: #333;
+    color: #ddd;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border-left: 3px solid #ffcc00;
+    margin-top: 5px;
+    animation: slideDown 0.3s ease-in-out;
+}
+
+.divcontent p {
+    margin: 5px 0;
+}
+
+/* Hiệu ứng mượt */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mũi tên xoay xuống khi mở */
+.rotate-down {
+    transform: rotate(180deg);
+}
+
+.rebate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.rebate-table th,
+.rebate-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.rebate-table th {
+    background-color: #222;
+    color: white;
+}
