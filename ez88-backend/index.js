@@ -25,5 +25,4 @@ taiXiuSocket(io);
 const PORT = 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-// Xuất io để dùng trong Cron Job
 module.exports = { io,app };

@@ -1,0 +1,1 @@
+export { default as TaiXiuBetModal  } from './TaiXiuBetModal'

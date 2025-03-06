@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+$primary-color: #2c1a10;
+$secondary-color: #3a2817;
+$text-color: #fff;
+$gold-color: #ffcc00;
+$border-radius: 12px;
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.modal-content {
+  background: $primary-color;
+  color: $text-color;
+  width: 800px;
+  max-width: 95%;
+  padding: 20px;
+  border-radius: $border-radius;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: $gold-color;
+    font-size: 26px;
+    cursor: pointer;
+    transition: color 0.3s;
+    
+    &:hover {
+      color: red;
+    }
+  }
+}
+
+.countdown {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 15px 0;
+  color: $gold-color;
+}
+
+.main-section {
+  display: flex;
+  gap: 20px;
+
+  .bet-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .choice-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+
+      .choice {
+        background: #444;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: 0.3s;
+
+        &.tai {
+          background: #993333;
+          &:hover {
+            background: #bb4444;
+          }
+        }
+        &.xiu {
+          background: #333399;
+          &:hover {
+            background: #4444bb;
+          }
+        }
+        &.selected {
+          outline: 3px solid gold;
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    .amount-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+
+      input {
+        width: 120px;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #888;
+        text-align: center;
+        font-size: 16px;
+        background: #222;
+        color: $gold-color;
+      }
+
+      .btn-bet {
+        background: $gold-color;
+        color: #000;
+        font-weight: bold;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+
+        &:hover {
+          background: #e6bf00;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  /* 🎲 Xúc xắc 3D */
+  .dice-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+
+    .dice {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s ease-in-out;
+      margin: 0 10px;
+
+      &.rolling {
+        animation: shakeDice 0.6s infinite linear;
+      }
+
+      .face {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 8px;
+        border: 2px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: black;
+      }
+
+      .front { transform: translateZ(30px); }
+      .back { transform: rotateY(180deg) translateZ(30px); }
+      .right { transform: rotateY(90deg) translateZ(30px); }
+      .left { transform: rotateY(-90deg) translateZ(30px); }
+      .top { transform: rotateX(90deg) translateZ(30px); }
+      .bottom { transform: rotateX(-90deg) translateZ(30px); }
+    }
+  }
+
+  @keyframes shakeDice {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    25% { transform: rotateX(20deg) rotateY(20deg); }
+    50% { transform: rotateX(-20deg) rotateY(-20deg); }
+    75% { transform: rotateX(10deg) rotateY(10deg); }
+    100% { transform: rotateX(0deg) rotateY(0deg); }
+  }
+
+  /* 💬 Khu vực chat */
+  .chat-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: $secondary-color;
+    border-radius: 8px;
+    padding: 10px;
+    height: 250px;
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 200px;
+      padding: 8px;
+      background: #222;
+      border-radius: 5px;
+
+      .chat-message {
+        padding: 8px;
+        background: #2c1a10;
+        border-radius: 5px;
+        margin-bottom: 5px;
+
+        b {
+          color: $gold-color;
+        }
+      }
+    }
+
+    .chat-input {
+      padding: 10px;
+      border: 1px solid #555;
+      border-radius: 8px;
+      outline: none;
+      width: 100%;
+      font-size: 16px;
+      background: #111;
+      color: $gold-color;
+    }
+  }
+}
