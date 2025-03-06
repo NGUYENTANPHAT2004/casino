@@ -1,22 +1,16 @@
-const { Server } = require("socket.io");
+const socketIo = require('socket.io');
 
-module.exports = (server) => {
-  const io = new Server(server, {
-    cors: { origin: "*" },
-  });
-
-  io.on("connection", (socket) => {
-    console.log("✅ New user connected:", socket.id);
-
-    socket.on("placeBet", (data) => {
-      console.log("User placed bet:", data);
-      io.emit("updateBets", data);
-    });
-
-    socket.on("disconnect", () => {
-      console.log("❌ User disconnected:", socket.id);
-    });
-  });
-
-  return io;
+let io;
+const initSocket = (server) => {
+    io = socketIo(server, { cors: { origin: "*" } });
+    return io;
 };
+
+const getIo = () => {
+    if (!io) {
+        throw new Error("Socket.io chưa được khởi tạo!");
+    }
+    return io;
+};
+
+module.exports = { initSocket, getIo };
