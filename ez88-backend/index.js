@@ -5,7 +5,8 @@ const cors = require('cors');
 const connectDB = require("./src/config/db")
 const taiXiuRoutes = require('./src/router/taixiu');
 const taiXiuSocket = require('./src/sockets/taiXiuSocket');
-const { initSocket } = require('./src/config/socket')
+const { initSocket } = require('./src/config/socket');
+const chatsocket = require('./src/sockets/chatsocket');
 require('./src/CronJob/taiXiuJob'); 
 const app = express();
 app.use(cors());
@@ -21,6 +22,7 @@ app.use('/api/taixiu', taiXiuRoutes);
 
 // Khởi động WebSocket
 taiXiuSocket(io);
+chatsocket(io);
 
 const PORT = 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
