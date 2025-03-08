@@ -9,7 +9,7 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
   const [userId] = useState("player123");
   const [amount, setAmount] = useState("");
   const [choice, setChoice] = useState("");
-  const [countdown, setCountdown] = useState(45);
+  const [countdown, setCountdown] = useState(60);
   const [isRolling, setIsRolling] = useState(false);
   const [taiBet, setTaiBet] = useState(0);
   const [xiuBet, setXiuBet] = useState(0);
@@ -56,7 +56,6 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
       return () => clearInterval(timer);
     }
   }, [isOpen]);
-
   // 🔥 Lấy vòng chơi mới nhất
   useEffect(() => {
     const fetchData = async () => {
@@ -472,10 +471,10 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
                 {messages.map((msg, idx) => (
                   <div key={idx} className="chat-message">
                     <span className="chat-time">
-                      {new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
+                      {new Date((msg.createdAt)).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
                     </span>
                     <span className="chat-user">{msg.user}:</span>
-                    <span className="chat-text">{msg.message}</span>
+                    <span className="chat-text">{msg.content}</span>
                   </div>
                 ))}
               </div>

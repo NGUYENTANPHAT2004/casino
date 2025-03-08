@@ -16,10 +16,10 @@ module.exports = (io) => {
     });
 
     // Xử lý tin nhắn mới
-    socket.on('sendMessage', async ({ userId, message }) => {
+    socket.on('sendMessage', async ({ userId, content }) => {
       try {
         // Lưu tin nhắn vào database
-        const savedMessage = await ChatService.saveMessage(userId,message);
+        const savedMessage = await ChatService.saveMessage(userId,content);
 
         // Phát tin nhắn đến tất cả người dùng
         io.emit('newMessage', savedMessage);
