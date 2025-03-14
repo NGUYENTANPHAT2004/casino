@@ -23,12 +23,25 @@ cron.schedule('* * * * *', async () => {
         const latestRound = await getLatestResult();
         if (!latestRound) return;
 
-        // Tính kết quả (Tài hoặc Xỉu)
-        const newResult = Math.random() < 0.5 ? "Tài" : "Xỉu";
+        const diceValues = [
+            Math.floor(Math.random() * 6) + 1,
+            Math.floor(Math.random() * 6) + 1,
+            Math.floor(Math.random() * 6) + 1
+          ];
+          const total = diceValues.reduce((a, b) => a + b, 0);
+          const newResult = total >= 11 ? "Tài" : "Xỉu";
+          // Gán vào phiên và gửi về client:
+          latestRound.result = newResult;
+          latestRound.dice = diceValues;
+          
         latestRound.result = newResult;
+        latestRound.endTime = new Date();
         await latestRound.save();
-
+        const durationMs = latestRound.endTime - latestRound.startTime;
+        const durationSec = durationMs / 1000;
+        console.log(`Phiên ${latestRound.round} kéo dài ${durationSec} giây`);
         console.log(`🏆 Kết thúc vòng ${latestRound.round}: ${latestRound.result}`);
+        console.log(`kq ${latestRound.dice}`);
         io.emit('taixiuUpdate', latestRound);
     }, 60000);
 });

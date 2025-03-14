@@ -7,11 +7,9 @@ const getLatestResult = async () => {
 const createNewRound = async () => {
     const latestRound = await getLatestResult();
     const nextRound = latestRound ? latestRound.round + 1 : 1;
-
     const newResult = Math.random() < 0.5 ? "Tài" : "Xỉu";
-    const newGame = new TaiXiu({ round: nextRound, result: newResult, bets: [] });
+    const newGame = new TaiXiu({ round: nextRound, result: newResult, bets: [] ,startTime: new Date()});
     await newGame.save();
-
     return newGame;
 };
 

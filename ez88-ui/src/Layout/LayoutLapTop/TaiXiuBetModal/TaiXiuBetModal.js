@@ -9,7 +9,8 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
   const [userId] = useState("player123");
   const [amount, setAmount] = useState("");
   const [choice, setChoice] = useState("");
-  const [countdown, setCountdown] = useState(60);
+  const [countdown, setCountdown] = useState(null);
+  const [roundStartTime, setRoundStartTime] = useState(null);
   const [isRolling, setIsRolling] = useState(false);
   const [taiBet, setTaiBet] = useState(0);
   const [xiuBet, setXiuBet] = useState(0);
@@ -43,20 +44,24 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
   const quickAmounts = [100000, 500000, 1000000, 5000000];
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  // ⏰ Countdown timer với hiệu ứng nâng cao
+
+  // Đồng bộ countdown dựa trên startTime từ backend (phiên kéo dài 60s)
   useEffect(() => {
-    if (isOpen) {
+    if (roundStartTime) {
       const timer = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev > 0) return prev - 1;
-          rollDice();
-          return 45;
-        });
+        const elapsed = Math.floor((Date.now() - roundStartTime.getTime()) / 1000);
+        const remaining = Math.max(0, 60 - elapsed);
+        setCountdown(remaining);
+        if (remaining === 0) {
+          // Khi hết thời gian đặt cược, trigger animation nếu chưa có kết quả từ backend
+          if (!result) rollDiceAnimation();
+        }
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [isOpen]);
-  // 🔥 Lấy vòng chơi mới nhất
+  }, [roundStartTime, result]);
+
+  // Lấy dữ liệu cược tổng khi modal mở
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -70,34 +75,32 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
         console.error("Không thể lấy dữ liệu:", error);
       }
     };
-
     fetchData();
   }, [isOpen]);
 
-  // 📨 Chat real-time
+  // Xử lý chat realtime
   useEffect(() => {
     socket.emit("requestChatHistory");
-
     socket.on("chatHistory", (history) => {
       setMessages(history);
       scrollToBottom();
     });
-
     socket.on("newMessage", (message) => {
       setMessages((prev) => [...prev, message]);
       scrollToBottom();
     });
-
     return () => {
       socket.off("chatHistory");
       socket.off("newMessage");
     };
   }, []);
+
   const scrollToBottom = () => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
   };
+
   const handleSendMessage = () => {
     if (newMessage.trim() !== "") {
       socket.emit("sendMessage", { userId, content: newMessage });
@@ -105,29 +108,40 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
     }
   };
 
+  // Lắng nghe event từ server
   useEffect(() => {
     socket.on("taixiuUpdate", (data) => {
-      if (data.bettingClosed) {
-        rollDice();
+      // Đồng bộ thời gian phiên mới
+      if (data.startTime) {
+        const start = new Date(data.startTime);
+        setRoundStartTime(start);
+        setCountdown(60);
+        setResult(null); // reset kết quả cũ
       }
-
-      if (data.result) {
-        setResult(data.result);
-        showGameResult(data.result);
+      // Nếu server đóng cược, không cho đặt cược thêm
+      if (data.bettingClosed) {
+        // Bạn có thể hiển thị thông báo "Đã đóng cược" tại đây nếu muốn
+      }
+      // Nếu server gửi kết quả cuối cùng
+      if (data.result && data.result !== "Đang chờ...") {
+        // Cập nhật kết quả, tổng điểm và các giá trị xúc xắc (nếu có)
+        setResult({ result: data.result, total: data.total });
+        if (data.dice) {
+          setDiceValues(data.dice);
+          setDiceRotation(getDiceRotation(data.dice));
+        }
+        showGameResult({ result: data.result, total: data.total, dice: data.dice });
       }
     });
-
     return () => {
       socket.off("taixiuUpdate");
     };
   }, []);
 
-  // 🎲 Xúc xắc quay với animation chuyên nghiệp
-  const rollDice = () => {
+  // Nếu chưa có dữ liệu xúc xắc từ backend, hiển thị animation local (chỉ để người chơi thấy hiệu ứng)
+  const rollDiceAnimation = () => {
     setIsRolling(true);
     setShowResult(false);
-    
-    // Hiệu ứng quay xúc xắc
     const rollInterval = setInterval(() => {
       setDiceRotation([
         { x: Math.floor(Math.random() * 360), y: Math.floor(Math.random() * 360) },
@@ -135,77 +149,58 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
         { x: Math.floor(Math.random() * 360), y: Math.floor(Math.random() * 360) },
       ]);
     }, 100);
-    
-    // Kết thúc hiệu ứng và hiển thị kết quả
     setTimeout(() => {
       clearInterval(rollInterval);
-      
-      // Kết quả ngẫu nhiên từ 1-6 cho mỗi xúc xắc
-      const newDiceValues = [
+      // Nếu backend chưa trả kết quả, vẫn hiển thị kết quả local tạm thời
+      const localDice = [
         Math.floor(Math.random() * 6) + 1,
         Math.floor(Math.random() * 6) + 1,
-        Math.floor(Math.random() * 6) + 1
+        Math.floor(Math.random() * 6) + 1,
       ];
-      
-      setDiceValues(newDiceValues);
-      setDiceRotation(getDiceRotation(newDiceValues));
+      setDiceValues(localDice);
+      setDiceRotation(getDiceRotation(localDice));
       setIsRolling(false);
-      
-      // Tính tổng điểm
-      const total = newDiceValues.reduce((a, b) => a + b, 0);
-      const gameResult = total >= 11 ? "Tài" : "Xỉu";
-      
-      // Cập nhật lịch sử
-      setGameHistory(prev => [{
-        id: prev.length + 1,
-        result: gameResult,
-        total: total
-      }, ...prev.slice(0, 19)]);
-      
-      // Hiển thị kết quả
-      setTimeout(() => {
-        showGameResult({ dice: newDiceValues, total, result: gameResult });
-      }, 500);
+      const total = localDice.reduce((a, b) => a + b, 0);
+      const localResult = total >= 11 ? "Tài" : "Xỉu";
+      // Cập nhật lịch sử game
+      setGameHistory((prev) => [
+        { id: prev.length + 1, result: localResult, total },
+        ...prev.slice(0, 19),
+      ]);
+      showGameResult({ dice: localDice, total, result: localResult });
     }, 2000);
   };
 
-  // Chuyển đổi giá trị xúc xắc thành góc xoay 3D
   const getDiceRotation = (values) => {
-    // Mapping giữa giá trị xúc xắc và góc xoay
     const rotations = [
-      { x: 0, y: 0 },      // 1 - mặt trên
-      { x: -90, y: 0 },    // 2 - mặt phải
-      { x: 0, y: 90 },     // 3 - mặt trước
-      { x: 0, y: -90 },    // 4 - mặt sau
-      { x: 90, y: 0 },     // 5 - mặt trái
-      { x: 180, y: 0 }     // 6 - mặt dưới
+      { x: 0, y: 0 },      // 1
+      { x: -90, y: 0 },    // 2
+      { x: 0, y: 90 },     // 3
+      { x: 0, y: -90 },    // 4
+      { x: 90, y: 0 },     // 5
+      { x: 180, y: 0 },    // 6
     ];
-    
     return values.map(val => rotations[val - 1]);
   };
 
-  // Hiển thị kết quả game với animation
-  const showGameResult = (result) => {
-    setResult(result);
+  // Hiển thị kết quả game và cập nhật lịch sử cược
+  const showGameResult = (resultData) => {
+    setResult(resultData);
     setShowResult(true);
-    
-    // Cập nhật lịch sử đặt cược nếu người chơi đã đặt cược
     if (choice) {
-      const isWin = choice === result.result;
+      const isWin = choice === resultData.result;
       const profit = isWin ? parseInt(amount) * 0.95 : -parseInt(amount);
-      
-      setBetHistory(prev => [{
-        time: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
-        choice: choice,
-        amount: parseInt(amount),
-        result: isWin ? "Thắng" : "Thua",
-        profit: profit
-      }, ...prev]);
-      
-      // Cập nhật số dư
-      setUserBalance(prev => prev + profit);
-      
-      // Reset lựa chọn
+      setBetHistory((prev) => [
+        {
+          time: new Date().toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" }),
+          choice,
+          amount: parseInt(amount),
+          result: isWin ? "Thắng" : "Thua",
+          profit,
+        },
+        ...prev,
+      ]);
+      setUserBalance((prev) => prev + profit);
       setChoice("");
       setAmount("");
     }
@@ -213,24 +208,19 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
 
   // Đặt cược
   const placeBet = async () => {
-    if (!amount || !choice) return alert("Vui lòng nhập số tiền và chọn Tài hoặc Xỉu!");
+    if (!amount || !choice)
+      return alert("Vui lòng nhập số tiền và chọn Tài hoặc Xỉu!");
     if (parseInt(amount) > userBalance) return alert("Số dư không đủ!");
     if (countdown < 5) return alert("Hết thời gian đặt cược!");
-    
     try {
-      await axios.post("http://localhost:5000/api/taixiu/bet", { 
-        userId, 
-        amount: parseInt(amount), 
-        choice: choice === "tai" ? "Tài" : "Xỉu" 
+      await axios.post("http://localhost:5000/api/taixiu/bet", {
+        userId,
+        amount: parseInt(amount),
+        choice: choice === "tai" ? "Tài" : "Xỉu",
       });
-      
-      // Cập nhật tổng cược
-      if (choice === "tai") {
-        setTaiBet(prev => prev + parseInt(amount));
-      } else {
-        setXiuBet(prev => prev + parseInt(amount));
-      }
-      
+      choice === "tai"
+        ? setTaiBet((prev) => prev + parseInt(amount))
+        : setXiuBet((prev) => prev + parseInt(amount));
       alert("Đặt cược thành công!");
     } catch (error) {
       console.error("Lỗi đặt cược:", error);
@@ -238,15 +228,8 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
     }
   };
 
-  // Xử lý số tiền nhanh
-  const handleQuickAmount = (value) => {
-    setAmount(value.toString());
-  };
-
-  // Format tiền VND
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('vi-VN').format(value);
-  };
+  const handleQuickAmount = (value) => setAmount(value.toString());
+  const formatCurrency = (value) => new Intl.NumberFormat("vi-VN").format(value);
 
   return (
     <div className={`taixiu-modal-overlay ${isOpen ? "open" : ""}`} onClick={onClose}>
@@ -274,16 +257,12 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
               <h3>Lịch sử phiên</h3>
               <div className="game-history">
                 {gameHistory.slice(0, 10).map((game) => (
-                  <div 
-                    key={game.id} 
-                    className={`history-item ${game.result === "Tài" ? "tai" : "xiu"}`}
-                  >
+                  <div key={game.id} className={`history-item ${game.result === "Tài" ? "tai" : "xiu"}`}>
                     {game.total}
                   </div>
                 ))}
               </div>
             </div>
-            
             <div className="betting-history">
               <h3>Lịch sử cược</h3>
               <div className="betting-table">
@@ -318,10 +297,7 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
           <div className="taixiu-center-panel">
             <div className="bet-section">
               <div className="choice-container">
-                <button 
-                  className={`choice tai ${choice === "tai" ? "selected" : ""}`} 
-                  onClick={() => setChoice("tai")}
-                >
+                <button className={`choice tai ${choice === "tai" ? "selected" : ""}`} onClick={() => setChoice("tai")}>
                   <div className="choice-label">TÀI</div>
                   <div className="dice-indicators">
                     <span>11</span>
@@ -335,11 +311,7 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
                   </div>
                   <div className="total-bet">{formatCurrency(taiBet)} VNĐ</div>
                 </button>
-                
-                <button 
-                  className={`choice xiu ${choice === "xiu" ? "selected" : ""}`} 
-                  onClick={() => setChoice("xiu")}
-                >
+                <button className={`choice xiu ${choice === "xiu" ? "selected" : ""}`} onClick={() => setChoice("xiu")}>
                   <div className="choice-label">XỈU</div>
                   <div className="dice-indicators">
                     <span>3</span>
@@ -354,14 +326,13 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
                   <div className="total-bet">{formatCurrency(xiuBet)} VNĐ</div>
                 </button>
               </div>
-
               <div className="betting-controls">
                 <div className="amount-input-container">
-                  <input 
-                    type="text" 
-                    placeholder="Nhập số tiền cược" 
-                    value={amount} 
-                    onChange={(e) => setAmount(e.target.value.replace(/\D/g, ''))}
+                  <input
+                    type="text"
+                    placeholder="Nhập số tiền cược"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value.replace(/\D/g, ""))}
                   />
                   <div className="quick-amounts">
                     {quickAmounts.map((amt) => (
@@ -371,31 +342,18 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
                     ))}
                   </div>
                 </div>
-                
-                <button 
-                  className={`btn-bet ${!choice || !amount ? "disabled" : ""}`} 
-                  onClick={placeBet}
-                  disabled={!choice || !amount || countdown < 5}
-                >
+                <button className={`btn-bet ${!choice || !amount ? "disabled" : ""}`}
+                  onClick={placeBet} disabled={!choice || !amount || countdown < 5}>
                   Đặt Cược
                 </button>
               </div>
             </div>
-
-            {/* 🎲 Khu vực xúc xắc 3D cao cấp */}
             <div className="dice-arena">
               <div className="dice-container">
                 {diceRotation.map((rotation, i) => (
-                  <div 
-                    key={i} 
-                    className={`dice ${isRolling ? "rolling" : ""}`} 
-                    style={{
-                      transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-                    }}
-                  >
-                    <div className="face front">
-                      <div className="dice-dot"></div>
-                    </div>
+                  <div key={i} className={`dice ${isRolling ? "rolling" : ""}`}
+                    style={{ transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}>
+                    <div className="face front"><div className="dice-dot"></div></div>
                     <div className="face back">
                       <div className="dice-dots six">
                         <div className="dice-dot"></div>
@@ -439,8 +397,7 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
                   </div>
                 ))}
               </div>
-              
-              {showResult && (
+              {result && (
                 <div className="dice-result">
                   <div className={`result-display ${result.result === "Tài" ? "tai" : "xiu"}`}>
                     <div className="result-title">{result.result}</div>
@@ -450,7 +407,6 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
               )}
             </div>
           </div>
-
           <div className="taixiu-right-panel">
             <div className="top-winners">
               <h3>BXH Thắng Lớn</h3>
@@ -464,14 +420,13 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
                 ))}
               </div>
             </div>
-            
             <div className="chat-section">
               <h3>Trò chuyện</h3>
               <div className="chat-messages" ref={chatRef}>
                 {messages.map((msg, idx) => (
                   <div key={idx} className="chat-message">
                     <span className="chat-time">
-                      {new Date((msg.createdAt)).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
+                      {new Date(msg.createdAt).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}
                     </span>
                     <span className="chat-user">{msg.user}:</span>
                     <span className="chat-text">{msg.content}</span>
@@ -479,15 +434,15 @@ export default function TaiXiuBetModal({ isOpen, onClose }) {
                 ))}
               </div>
               <div className="chat-input-container">
-                <input 
-                  type="text" 
-                  className="chat-input" 
-                  placeholder="Nhập tin nhắn..." 
+                <input
+                  type="text"
+                  className="chat-input"
+                  placeholder="Nhập tin nhắn..."
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
                 />
-                <button className="chat-send">
+                <button className="chat-send" onClick={handleSendMessage}>
                   <span>Gửi</span>
                 </button>
               </div>

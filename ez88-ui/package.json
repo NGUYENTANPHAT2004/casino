@@ -29,6 +29,7 @@
     "react-toastify": "^11.0.3",
     "sass": "^1.85.1",
     "scss": "^0.2.4",
+    "shopdunk": "file:",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.8.1",
     "tailwindcss": "^4.0.11",
